@@ -38,13 +38,15 @@ func (s *Strip) TurnOn(p Pixel) error {
 }
 
 func (s *Strip) AllOn(c Color) error {
+	data := []byte{}
 	for i := 0; i < s.Size; i++ {
-		err := s.TurnOn(Pixel{Idx: 1, RGB: c})
-		if err != nil {
-			return err
+		pixel := Pixel{Idx: uint32(i), RGB: c}
+		for _, b := range pixel.toBytes() {
+			data = append(data, b)
 		}
 	}
-	return nil
+	_, err := s.Conn.Write(data)
+	return err
 }
 
 type Pixel struct {
