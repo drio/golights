@@ -32,27 +32,34 @@ func (s *Strip) Connect() error {
 	return nil
 }
 
-func (s *Strip) TurnOn(led int, sc StripColor) error {
-	p := packet{byte(led), byte(sc.R), byte(sc.G), byte(sc.B)}
+func (s *Strip) TurnOn(p Pixel) error {
 	_, err := s.Conn.Write(p.toBytes())
 	return err
 }
 
-type StripColor struct {
-	R, G, B uint32
+func (s *Strip) AllOn(c Color) error {
+	for i := 0; i < s.Size; i++ {
+		err := s.TurnOn(Pixel{Idx: 1, RGB: c})
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
-func (c *StripColor) rgba() (r, g, b, a uint32) {
-	return c.R, c.G, c.B, 1
+type Pixel struct {
+	Idx uint32
+	RGB Color
 }
 
-type packet struct {
-	led   byte
-	red   byte
-	green byte
-	blue  byte
+func (p *Pixel) rgba() (r, g, b, a uint32) {
+	return p.RGB.R, p.RGB.G, p.RGB.B, 1
 }
 
-func (p packet) toBytes() []byte {
-	return []byte{p.led, p.red, p.green, p.blue}
+func (p *Pixel) toBytes() []byte {
+	return []byte{byte(p.Idx), byte(p.RGB.R), byte(p.RGB.G), byte(p.RGB.B)}
+}
+
+type Color struct {
+	R, G, B, A uint32
 }

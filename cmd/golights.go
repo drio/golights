@@ -15,22 +15,21 @@ func main() {
 	}
 	defer theStrip.Conn.Close()
 
-	err = theStrip.TurnOn(12, golights.StripColor{R: 0, G: 0, B: 255})
+	err = theStrip.AllOn(golights.Color{R: 0, G: 0, B: 255})
 	if err != nil {
 		fmt.Println("error: ", err)
 	}
 
 	oneSecond, _ := time.ParseDuration("1s")
 	time.Sleep(oneSecond)
-	err = theStrip.TurnOn(12, golights.StripColor{R: 0, G: 255, B: 0})
+	err = theStrip.AllOn(golights.Color{R: 0, G: 255, B: 0})
 	if err != nil {
 		fmt.Println("error: ", err)
 	}
 
 	time.Sleep(oneSecond)
-	err = theStrip.TurnOn(12, golights.StripColor{R: 0, G: 0, B: 0})
+	err = theStrip.AllOn(golights.Color{R: 0, G: 0, B: 0})
 	if err != nil {
 		fmt.Println("error: ", err)
 	}
-
 }
