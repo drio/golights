@@ -33,4 +33,15 @@ func main() {
 		fmt.Println("error: ", err)
 	}
 
+	time.Sleep(oneSecond)
+	err = theStrip.TurnOn(golights.Pixel{Idx: 45, RGB: golights.Color{R: 255}})
+	if err != nil {
+		fmt.Println("error: ", err)
+	}
+
+	time.Sleep(oneSecond)
+	err = theStrip.TurnOn(golights.Pixel{Idx: 45, RGB: golights.Color{R: 0}})
+	if err != nil {
+		fmt.Println("error: ", err)
+	}
 }
