@@ -14,6 +14,9 @@ help: ## This help dialog
 sync: ## Push to dropbox bare git repo
 	git push origin master
 
+tmux: ## load tmux
+	./setup-tmux.sh
+
 createDBRepo: ## Create Dropbox repo
 	cd ~drio/Dropbox/git_repo;\
 	./create-bare-repo.sh ${PRJ};\
