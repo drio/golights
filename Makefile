@@ -23,3 +23,6 @@ createDBRepo: ## Create Dropbox repo
 	cd -;\
 	git remote add origin ~/Dropbox/git_repo/${PRJ}.git;\
 	git push -u origin master
+
+on off: 
+	make -f ~drio/dev/iot/ifttt/Makefile strip_$@
