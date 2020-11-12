@@ -61,10 +61,13 @@ func (s *Strip) Set(c Color) error {
 		}
 	}
 	_, err := s.Conn.Write(data)
+
 	if err != nil {
-		time.Sleep(s.Duration)
+		return err
 	}
-	return err
+
+	time.Sleep(s.Duration)
+	return nil
 }
 
 func (s *Strip) FillUp(color Color, start int, numLeds int) error {

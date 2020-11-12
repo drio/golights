@@ -16,25 +16,9 @@ var fiftyMil, _ = time.ParseDuration("50ms")
 var aBit, _ = time.ParseDuration("20ms")
 var aBitLess, _ = time.ParseDuration("10ms")
 
-/*
-	for i := 0; i < 50; i++ {
-		theStrip.TurnOn(golights.Pixel{Idx: uint32(i), RGB: golights.Color{R: 100, G: 0, B: 0}})
-		theStrip.TurnOn(golights.Pixel{Idx: uint32(numLeds - i), RGB: golights.Color{R: 0, G: 0, B: 100}})
-		fmt.Println(i)
-		time.Sleep(aBit)
-	}
-	for i := 50; i >= 0; i-- {
-		theStrip.TurnOn(golights.Pixel{Idx: uint32(i), RGB: golights.Color{R: 0, G: 0, B: 0}})
-		theStrip.TurnOn(golights.Pixel{Idx: uint32(numLeds - i), RGB: golights.Color{R: 0, G: 0, B: 0}})
-		fmt.Println(i)
-		time.Sleep(aBit)
-	}
-
-*/
-
 func main() {
 	numLeds := 100
-	s := golights.Strip{Size: numLeds, Port: 7777, Ip: "192.168.8.186", Duration: fiveHundredMil}
+	s := golights.Strip{Size: numLeds, Port: 7777, Ip: "192.168.8.186", Duration: oneSecond}
 	err := s.Connect()
 	if err != nil {
 		log.Fatal("error: ", err)
@@ -64,9 +48,12 @@ func main() {
 	s.RaiseUp(golights.NoColor, 10, 0, 255)
 	s.RaiseDown(golights.White, 10, 0, 255)
 
+	s.Duration = oneSecond
 	err = s.Set(golights.NoColor)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	time.Sleep(s.Duration)
 	os.Exit(0)
 }
