@@ -18,7 +18,7 @@ func (s *Strip) Connect() error {
 	}
 
 	// TODO: get local ip or pass it
-	LocalAddr, err := net.ResolveUDPAddr("udp", "192.168.8.113:0")
+	LocalAddr, err := net.ResolveUDPAddr("udp", "192.168.8.114:0")
 	if err != nil {
 		return err
 	}
