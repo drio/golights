@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/drio/golights"
+	"golights"
 )
 
 var fiveSecond, _ = time.ParseDuration("5s")
