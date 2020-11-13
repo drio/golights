@@ -18,7 +18,7 @@ var aBitLess, _ = time.ParseDuration("10ms")
 
 func main() {
 	numLeds := 100
-	s := golights.Strip{Size: numLeds, Port: 7777, Ip: "192.168.8.186", Duration: oneSecond}
+	s := golights.Strip{Size: numLeds, Port: 7777, LocalIp: "192.168.8.114", Ip: "192.168.8.186", Duration: oneSecond}
 	err := s.Connect()
 	if err != nil {
 		log.Fatal("error: ", err)

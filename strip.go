@@ -9,6 +9,7 @@ import (
 type Strip struct {
 	Size, Port int
 	Ip         string
+	LocalIp    string
 	Conn       *net.UDPConn
 	Duration   time.Duration
 }
@@ -30,7 +31,8 @@ func (s *Strip) Connect() error {
 	}
 
 	// TODO: get local ip or pass it
-	LocalAddr, err := net.ResolveUDPAddr("udp", "192.168.8.114:0")
+	localIp := fmt.Sprintf("%s:0", s.LocalIp)
+	LocalAddr, err := net.ResolveUDPAddr("udp", localIp)
 	if err != nil {
 		return err
 	}
